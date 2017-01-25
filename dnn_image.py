@@ -46,7 +46,7 @@ model.add(Activation('sigmoid'))
 
 model.summary()
 
-sgd = SGD(lr=0.05, momentum=0.9, decay=0.0, nesterov=False)
+sgd = SGD(lr=0.02, momentum=0.9, decay=0.0, nesterov=False)
 model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
 model.fit(X, Y, batch_size=batch_size, nb_epoch=nb_epoch, 
           verbose=1, validation_data=(X, Y))
