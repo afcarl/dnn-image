@@ -9,7 +9,6 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Activation
 from keras.layers import Dropout
-from keras.optimizers import SGD
 
 np.random.seed(0)
 
@@ -29,11 +28,11 @@ print 'Sample output shape: %s' % str(Y.shape)
 
 ''' Multilayer Perceptron (MLP) '''
 
-num_hidden_layers = 6
-num_hidden_neurons = 32
+num_hidden_layers = 16
+num_hidden_neurons = 40
 
-batch_size = 100
-nb_epoch = 30
+batch_size = 50
+nb_epoch = 100
 
 model = Sequential()
 model.add(Dense(num_hidden_neurons, input_dim=2))
@@ -46,8 +45,7 @@ model.add(Activation('sigmoid'))
 
 model.summary()
 
-sgd = SGD(lr=0.02, momentum=0.9, decay=0.0, nesterov=False)
-model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
+model.compile(loss='mean_squared_error', optimizer='adadelta', metrics=['accuracy'])
 model.fit(X, Y, batch_size=batch_size, nb_epoch=nb_epoch, 
           verbose=1, validation_data=(X, Y))
 
